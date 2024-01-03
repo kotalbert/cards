@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 // define new type `deck`
@@ -64,4 +66,16 @@ func newDeckFromFile(filename string) (deck, error) {
 
 	return d, err
 
+}
+
+// Shuffle deck in place by randomly swapping cards.
+func (d deck) shuffle() deck {
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
+	for i := range d {
+		np := r.Intn(len(d) - 1)
+		d[i], d[np] = d[np], d[i]
+	}
+	return d
 }
