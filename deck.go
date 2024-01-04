@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"os"
 	"strings"
@@ -53,8 +54,7 @@ func newDeckFromFile(filename string) (deck, error) {
 	bs, err := os.ReadFile(filename)
 
 	if err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 
 	s := strings.Split(string(bs), ",")
